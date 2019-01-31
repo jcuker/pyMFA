@@ -52,9 +52,19 @@ def pad_code(code):
         numAsString = "0" + numAsString
     return numAsString
 
+def resource_path(relative_path):
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 def read_sources_from_file():
     list_of_sources = []
-    data = open('mfa-data.csv')
+    data = open(resource_path('mfa-data.csv'))
+    print(data)
     reader = csv.DictReader(data, delimiter=',')
     for row in reader:
         source = Source(row['secret'], row['name'])

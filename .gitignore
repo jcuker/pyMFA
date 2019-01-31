@@ -1,1 +1,5 @@
 mfa-data.csv
+build/
+dist/
+__pycache__/
+*.spec
